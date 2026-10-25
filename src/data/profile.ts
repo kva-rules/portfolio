@@ -285,7 +285,7 @@ export const PROFILE_DATA: ProfileData = {
       categoryLabel: "AI & Agents",
       summary: "Autonomous multi-model intelligence network leveraging Model Context Protocol (MCP) server tooling, dual-routing between Claude & Gemini, and automated execution loops via Google ADK.",
       tags: ["Claude", "Gemini", "Google ADK", "MCP Server", "TypeScript", "React"],
-      githubUrl: "https://github.com/kva-rules/multi-agent-orchestrator",
+      githubUrl: "",
       hasLiveDemo: false,
       demoButtonText: "In Progress (Coming Soon)",
       runnerType: "ai-agent",
@@ -316,85 +316,88 @@ export const PROFILE_DATA: ProfileData = {
     {
       id: "proj-2",
       title: "Ticketing System – Event-Driven Microservices",
-      subtitle: "M.Tech final project (Jan–Jun 2026) · High-throughput distributed enterprise ticketing",
+      subtitle: "M.Tech final project (Jan–Jun 2026) · Support ticketing with solutions, knowledge base and rewards",
       badge: "Distributed Systems",
-      status: "Production Spec",
+      status: "Active",
       category: "spring-boot",
       categoryLabel: "Spring Boot",
-      summary: "High-throughput distributed event-driven ecosystem composed of 8 Spring Boot services, Apache Kafka message buses, distributed transactions, PostgreSQL, and container orchestration with Kubernetes.",
-      tags: ["8x Spring Boot", "Apache Kafka", "PostgreSQL", "Kubernetes", "React UI", "Docker", "JWT Auth"],
-      githubUrl: "https://github.com/kva-rules/event-driven-ticketing-system",
+      summary: "8 Spring Boot services behind a Spring Cloud Gateway with a React/Redux UI. Kafka events connect ticket lifecycle, collaborative solutions, auto-generated knowledge articles, gamified rewards/leaderboards and notifications, with a PostgreSQL database per service.",
+      tags: ["Java 21", "Spring Boot", "Spring Cloud Gateway", "Apache Kafka", "PostgreSQL", "React", "Redux", "Docker", "Kubernetes", "JWT"],
+      githubUrl: "https://github.com/kva-rules/project_docs",
       hasLiveDemo: true,
       demoButtonText: "Launch Kafka Topology Demo",
       runnerType: "kafka-microservices",
       architecture: {
-        overview: "8 decoupled Spring Boot microservices interconnected with partitioned Apache Kafka topics. Features database-per-service isolation (7 PostgreSQL instances), unified Spring Cloud Gateway with JWT authentication, and resilient distributed saga transactions.",
+        overview: "7 domain services (auth, user, ticket, solution, knowledge, reward, notification) plus an API gateway, each with its own PostgreSQL 16 database. Services publish domain events to Apache Kafka; reward, knowledge and notification services consume them. The gateway validates JWTs, injects user headers and aggregates every service's Swagger docs.",
         components: [
-          "Spring Cloud API Gateway: Central entry point, JWT verification, rate limiting, and unified Swagger aggregator",
-          "Auth & User Service: Identity management, BCrypt hashing, JWT token issuance",
-          "Ticket Catalog Service: Event catalog, seat inventory, pricing engine",
-          "Order & Booking Service: Saga coordinator for two-phase reservation flows",
-          "Payment Service: Idempotent payment gateway webhooks and receipt dispatch",
-          "Notification Service: Async email & SMS broker consuming booking events",
-          "Reporting & Analytics Service: Real-time ticket sales aggregation via Kafka Streams",
-          "Audit Log Service: Immutable compliance trail stored in append-only PostgreSQL"
+          "API Gateway (Spring Cloud Gateway): JWT validation, routing, CORS, aggregated Swagger UI",
+          "Auth Service: registration, login, JWT issuance, password reset events",
+          "User Service: user profiles, created from user.registered events",
+          "Ticket Service: ticket lifecycle – create, assign, resolve, close",
+          "Solution Service: collaborative solutions with approvals and voting",
+          "Knowledge Service: auto-generates knowledge articles from approved solutions",
+          "Reward Service: points, badges and leaderboards driven by Kafka events",
+          "Notification Service: in-app and email notifications from 6 inbound topics",
+          "Frontend: React 18 + Redux Toolkit + Vite + Tailwind"
         ],
         dataFlow: [
-          "Client Request -> Spring Cloud Gateway (JWT Auth Check)",
-          "Gateway routes to Order Service -> Generates 'TICKET_RESERVED' Kafka event",
-          "Payment Service consumes 'TICKET_RESERVED' -> Processes charge -> Emits 'PAYMENT_CONFIRMED'",
-          "Notification & Ticket Service consume 'PAYMENT_CONFIRMED' -> Updates seat inventory -> Dispatches QR ticket",
-          "If payment fails -> Order Service consumes 'PAYMENT_FAILED' -> Triggers rollback saga"
+          "Client -> API Gateway (JWT check) -> Ticket Service",
+          "Ticket resolved -> 'ticket.resolved' event on Kafka",
+          "Reward Service consumes it -> adds points -> may emit 'reward.badge.awarded'",
+          "Solution approved -> Knowledge Service creates an article -> 'knowledge.created'",
+          "Notification Service consumes ticket, solution, reward and auth events -> notifies users"
         ],
-        diagramLabel: "8-Service Kafka Event Mesh & Database-per-Service Topology"
+        diagramLabel: "8-Service Kafka Event Flow & Database-per-Service Topology"
       },
       techSpecs: {
-        runtime: "Java 21 LTS (OpenJDK Temurin)",
-        frameworks: ["Spring Boot 3.3", "Spring Cloud Gateway", "Spring Data JPA", "Spring Security", "React 18 + Redux"],
-        databases: ["PostgreSQL 16 (7 isolated database instances)"],
-        messaging: ["Apache Kafka 3.7 (Partitioned cluster with KRaft mode)"],
-        testing: ["JUnit 5", "Testcontainers (PostgreSQL & Kafka)", "24-Step E2E Integration Suite"],
-        deployment: ["Kubernetes (Minikube / EKS)", "Helm Charts", "Docker Multi-stage Builds"]
+        runtime: "Java 21 (Temurin) · Maven",
+        frameworks: ["Spring Boot 3.2 / 3.3", "Spring Cloud Gateway", "springdoc-openapi", "React 18 + Redux Toolkit + Vite"],
+        databases: ["PostgreSQL 16 (one database per service)"],
+        messaging: ["Apache Kafka 3.6"],
+        testing: ["End-to-end test script", "45 documented test cases"],
+        deployment: ["Docker Compose", "Kubernetes manifests (kva-rules/k8s)"]
       }
     },
     {
       id: "proj-3",
-      title: "HMS Patient Service – Healthcare Microservice",
-      subtitle: "M.Tech course project (Jul–Nov 2025) · Secure, HIPAA-compliant patient record ingestion",
+      title: "Hospital Management System – Node.js Microservices",
+      subtitle: "M.Tech course project (Jul–Nov 2025) · Full Stack Development",
       badge: "Healthcare Tech",
-      status: "HIPAA Compliant",
+      status: "Active",
       category: "react",
-      categoryLabel: "React / Node.js",
-      summary: "Fault-tolerant EHR patient intake microservice built on Node.js/Express with strict schema validation, PostgreSQL relational indexing, Prometheus real-time health telemetry, and auto-generated Swagger OpenAPI specs.",
-      tags: ["Node.js", "Express", "PostgreSQL", "Prometheus", "OpenAPI", "Jest", "Docker"],
-      githubUrl: "https://github.com/kva-rules/hms-patient-service",
+      categoryLabel: "Node.js",
+      summary: "Hospital management backend split into 8 Node.js/Express microservices (patients, doctors, availability, appointments, billing, payments, notifications, orchestrator) communicating over RabbitMQ, with PostgreSQL per service, Redis locking, PII-masked logging and Prometheus metrics.",
+      tags: ["Node.js", "Express", "PostgreSQL", "Sequelize", "RabbitMQ", "Redis", "Prometheus", "OpenAPI", "Jest", "Docker"],
+      githubUrl: "https://github.com/kva-rules/Hospital-Management-System",
       hasLiveDemo: true,
       demoButtonText: "Interactive Swagger Runner",
       runnerType: "swagger-hms",
       architecture: {
-        overview: "Secure patient-record RESTful microservice engineering healthcare data ingestion pipelines with end-to-end PII masking, relational data normalization, health check probe endpoints, and Prometheus metrics scraping.",
+        overview: "Domain-split microservices with RESTful /v1 APIs and OpenAPI docs. Services exchange events over RabbitMQ (e.g. appointment.scheduled, bill.created), keep data isolated in separate PostgreSQL databases, and use Redis for distributed locks during appointment booking.",
         components: [
-          "Express REST Router: Strictly typed routes with input sanitization and PII redactor",
-          "Sequelize ORM Layer: Normalized schema handling patients, medical records, and vitals",
-          "PostgreSQL Engine: Indexed lookups by national health ID with encrypted at-rest storage",
-          "Prometheus Telemetry Exporter: Exposing latency percentiles, error rates, and request counts",
-          "Swagger / OpenAPI 3.0 Documentation: Auto-generated interactive contract"
+          "Patient Service: patient CRUD, search and validation with PII masking in logs",
+          "Doctor & Availability Services: doctor records and slot management",
+          "Appointment Service: booking, rescheduling and cancellation with concurrency control",
+          "Billing & Payment Services: bills on completion, idempotent payments and refunds",
+          "Notification & Orchestrator Services: event-driven workflows across services",
+          "Observability: /health endpoints and Prometheus /metrics"
         ],
         dataFlow: [
-          "HTTP Request -> PII Sanitization & Authorization Middleware",
-          "Input Validation (Joi/Zod) -> Controller Layer",
-          "Sequelize ORM -> Parameterized Query -> PostgreSQL Instance",
-          "Response Payload -> Logs emitted with HIPAA PII masking",
-          "Prometheus Scrapes /metrics endpoint at 15s intervals"
+          "Client -> Appointment Service (Redis lock on the doctor slot)",
+          "Appointment completed -> event on RabbitMQ",
+          "Billing Service creates the bill -> Payment Service processes payment",
+          "Notification Service informs the patient",
+          "Prometheus scrapes /metrics from each service"
         ],
-        diagramLabel: "HIPAA Compliant EHR Record Ingestion & Telemetry Architecture"
+        diagramLabel: "HMS Microservices & RabbitMQ Event Flow"
       },
       techSpecs: {
-        runtime: "Node.js 20 LTS",
-        frameworks: ["Express 4.19", "Sequelize ORM", "Swagger UI Express", "prom-client"],
-        databases: ["PostgreSQL 15 with B-Tree composite indexing"],
-        testing: ["Jest (94% coverage)", "Supertest HTTP assertions"],
-        deployment: ["Docker", "Kubernetes Pod with liveness/readiness probes"]
+        runtime: "Node.js (ES modules)",
+        frameworks: ["Express 4", "Sequelize ORM", "express-validator", "prom-client", "Winston"],
+        databases: ["PostgreSQL (one database per service)", "Redis (locks & caching)"],
+        messaging: ["RabbitMQ"],
+        testing: ["Jest", "Postman collection"],
+        deployment: ["Docker Compose", "Kubernetes manifests"]
       }
     }
   ],

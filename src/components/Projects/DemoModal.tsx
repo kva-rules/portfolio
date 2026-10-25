@@ -58,6 +58,7 @@ export function DemoModal({ project, onClose }: DemoModalProps) {
           </div>
 
           <div className="flex items-center gap-2">
+            {project.githubUrl && (
             <a
               href={project.githubUrl}
               target="_blank"
@@ -67,6 +68,7 @@ export function DemoModal({ project, onClose }: DemoModalProps) {
               <Github className="w-3.5 h-3.5" />
               <span>View source on GitHub</span>
             </a>
+            )}
             <button
               type="button"
               onClick={onClose}
@@ -175,10 +177,10 @@ function KafkaMicroservicesRunner() {
   const [isStreaming, setIsStreaming] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
   const [logs, setLogs] = useState<string[]>([
-    '[INIT] Gateway authenticated JWT token for client-usr-889',
-    '[ROUTER] Route matching /api/v1/orders -> OrderService:8082',
-    '[KAFKA] Emitted event: TICKET_RESERVED on topic "tickets.reservation"',
-    '[DB] PostgreSQL (OrderDB) transaction committed with status: PENDING_PAYMENT'
+    '[INIT] Gateway validated JWT for user-889',
+    '[ROUTER] Route matching /api/tickets -> ticket-service:8083',
+    '[KAFKA] Emitted event on topic "ticket.resolved"',
+    '[REWARD] reward-service consumed ticket.resolved -> +50 points'
   ]);
 
   // Periodic simulated packet flow
@@ -193,10 +195,8 @@ function KafkaMicroservicesRunner() {
   }, [isStreaming]);
 
   const handleDispatchTestOrder = () => {
-    const orderId = Math.floor(1000 + Math.random() * 9000);
-    const newLog = `[ORDER #${orderId}] Dispatched -> Gateway -> OrderService -> Kafka (Partition ${Math.floor(
-      Math.random() * 3
-    )}) -> PostgreSQL`;
+    const ticketId = Math.floor(1000 + Math.random() * 9000);
+    const newLog = `[TICKET #${ticketId}] Created -> Gateway -> ticket-service -> Kafka "ticket.created" -> notification-service`;
     setLogs((prev) => [newLog, ...prev.slice(0, 5)]);
     setMessagesProcessed((prev) => prev + 1);
     setActiveStep(1);
@@ -204,9 +204,9 @@ function KafkaMicroservicesRunner() {
 
   const steps = [
     { name: 'Gateway', desc: 'Spring Cloud Gateway (JWT Auth)', icon: Server },
-    { name: 'Order Service', desc: 'Spring Boot 3.3 (Saga Coordinator)', icon: Layers },
-    { name: 'Kafka Cluster', desc: 'Topic: tickets.reservation', icon: RefreshCw },
-    { name: 'PostgreSQL DB', desc: 'Database-per-Service (Instance 4)', icon: Database },
+    { name: 'Ticket Service', desc: 'Spring Boot 3.3 (ticket lifecycle)', icon: Layers },
+    { name: 'Kafka Cluster', desc: 'Topics: ticket.*, solution.*', icon: RefreshCw },
+    { name: 'PostgreSQL DB', desc: 'Database per service (ticket_db)', icon: Database },
   ];
 
   return (
@@ -229,7 +229,7 @@ function KafkaMicroservicesRunner() {
             className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-cyan-400 text-slate-950 hover:bg-cyan-300 transition-all flex items-center gap-1.5 shadow-[0_0_12px_rgba(34,211,238,0.3)] active:scale-95"
           >
             <Send className="w-3.5 h-3.5" />
-            <span>Dispatch Test Order</span>
+            <span>Create Test Ticket</span>
           </button>
 
           <button
@@ -318,72 +318,49 @@ function SwaggerHmsRunner() {
     {
       id: 'getAll',
       method: 'GET',
-      path: '/api/v1/patients',
-      desc: 'Retrieve paginated list of patients with HIPAA PII redaction',
+      status: 200,
+      path: '/v1/patients',
+      desc: 'List patients (email and phone masked in logs)',
       sampleResponse: {
-        status: 'success',
-        code: 200,
-        pagination: { page: 1, limit: 10, total: 42 },
         data: [
-          {
-            id: 'pat_0981a',
-            name: 'A****h K****r',
-            national_id: '***-**-7712',
-            email: 'a***k@example.com',
-            blood_group: 'O+',
-            admitted_at: '2026-10-24T08:30:00Z',
-            telemetry: { heart_rate: 74, bp: '120/80', oxygen_sat: 99 }
-          },
-          {
-            id: 'pat_0982b',
-            name: 'P***a S***h',
-            national_id: '***-**-9014',
-            email: 'p***s@example.com',
-            blood_group: 'A+',
-            admitted_at: '2026-10-24T10:15:00Z',
-            telemetry: { heart_rate: 68, bp: '118/76', oxygen_sat: 98 }
-          }
+          { patient_id: '3f1c…', name: 'Sample Patient A', email: 'sample.a@example.com', phone: '9000000001', dob: '1992-04-12', status: 'active' },
+          { patient_id: '8b2d…', name: 'Sample Patient B', email: 'sample.b@example.com', phone: '9000000002', dob: '1988-11-03', status: 'active' }
         ]
       }
     },
     {
       id: 'getById',
       method: 'GET',
-      path: '/api/v1/patients/{id}',
-      desc: 'Fetch single patient record by clinical UUID',
+      status: 200,
+      path: '/v1/patients/{id}',
+      desc: 'Fetch a single patient by UUID',
       sampleResponse: {
-        status: 'success',
-        code: 200,
-        data: {
-          id: 'pat_0981a',
-          name: 'A****h K****r',
-          national_id: '***-**-7712',
-          gender: 'Male',
-          dob_masked: '1992-**-**',
-          allergies: ['Penicillin'],
-          active_prescription: 'Amoxicillin 500mg',
-          audit_trail: { logged_by_role: 'NURSE_PRACTITIONER', timestamp: '2026-10-25T07:12:00Z' }
-        }
+        patient_id: '3f1c…',
+        name: 'Sample Patient A',
+        email: 'sample.a@example.com',
+        phone: '9000000001',
+        dob: '1992-04-12',
+        status: 'active',
+        created_at: '2025-10-01T09:30:00Z'
       }
     },
     {
       id: 'postPatient',
       method: 'POST',
-      path: '/api/v1/patients',
-      desc: 'Ingest new EHR patient record with automatic encryption & audit log',
+      status: 201,
+      path: '/v1/patients',
+      desc: 'Create a patient (validated with express-validator)',
       sampleResponse: {
-        status: 'created',
-        code: 201,
-        message: 'Patient record securely ingested with HIPAA compliance checks',
-        record_id: 'pat_0999z',
-        checksum: 'sha256:d8a2...3b9e',
-        created_at: '2026-10-25T07:35:12Z'
+        patient_id: '9a7e…',
+        name: 'Sample Patient C',
+        status: 'active',
+        created_at: '2025-10-01T09:35:12Z'
       }
     }
   ];
 
   const handleTryIt = (endpoint: (typeof endpoints)[0]) => {
-    setStatusOutput(endpoint.sampleResponse.code);
+    setStatusOutput(endpoint.status);
     setResponseOutput(JSON.stringify(endpoint.sampleResponse, null, 2));
   };
 

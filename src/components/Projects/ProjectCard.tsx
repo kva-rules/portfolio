@@ -95,6 +95,7 @@ export function ProjectCard({ project, onOpenDemo }: ProjectCardProps) {
         )}
 
         {/* GitHub link button */}
+        {project.githubUrl && (
         <a
           href={project.githubUrl}
           target="_blank"
@@ -105,6 +106,7 @@ export function ProjectCard({ project, onOpenDemo }: ProjectCardProps) {
           <Github className="w-3.5 h-3.5" />
           <span>GitHub</span>
         </a>
+        )}
 
       </div>
     </div>
