@@ -1,12 +1,10 @@
-import { Box, Radio, Music, Sparkles, Layers, ChevronRight, Activity } from 'lucide-react';
+import { Box, Sparkles, Layers, ChevronRight, Activity } from 'lucide-react';
 
 interface AiInnovationLabProps {
   onOpen3D: () => void;
-  onOpenVoice: () => void;
-  onOpenMusic: () => void;
 }
 
-export function AiInnovationLab({ onOpen3D, onOpenVoice, onOpenMusic }: AiInnovationLabProps) {
+export function AiInnovationLab({ onOpen3D }: AiInnovationLabProps) {
   const cards = [
     {
       id: '3d-scene',
@@ -18,28 +16,6 @@ export function AiInnovationLab({ onOpen3D, onOpenVoice, onOpenMusic }: AiInnova
       badgeColor: 'text-cyan-400 bg-cyan-950/40 border-cyan-400/30',
       actionText: 'Launch 3D Visualizer',
       action: onOpen3D,
-    },
-    {
-      id: 'live-voice',
-      title: 'Gemini 3.8 Live Voice Agent',
-      subtitle: 'Real-time Conversational Audio WebSocket Bridge',
-      desc: 'Talk live with Abhidhab’s conversational voice avatar powered by Gemini 3.8 Live API. Featuring real-time bidirectional streaming audio at low latency.',
-      icon: Radio,
-      badge: 'Gemini 3.8 Live API',
-      badgeColor: 'text-sky-400 bg-sky-950/40 border-sky-400/30',
-      actionText: 'Start Voice Session',
-      action: onOpenVoice,
-    },
-    {
-      id: 'lyria-music',
-      title: 'Lyria AI Music Generator',
-      subtitle: 'Lyria 3 Clip (30s) & Lyria 3 Pro Engine',
-      desc: 'Generate custom AI music soundtracks from text prompts using Google Lyria 3 models, with WAV playback and procedural synth soundscapes.',
-      icon: Music,
-      badge: 'Lyria 3 Engine',
-      badgeColor: 'text-amber-400 bg-amber-950/40 border-amber-400/30',
-      actionText: 'Open Music Studio',
-      action: onOpenMusic,
     },
   ];
 
@@ -55,17 +31,17 @@ export function AiInnovationLab({ onOpen3D, onOpenVoice, onOpenMusic }: AiInnova
               <span>Interactive R&amp;D Lab</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
-              3D Systems &amp; Multimodal AI
+              3D Systems Lab
             </h2>
           </div>
 
           <p className="text-xs font-mono text-slate-500 dark:text-slate-400">
-            Real-time WebGL rendering, Live API voice, and algorithmic synthesis
+            Real-time WebGL rendering of a microservice architecture node
           </p>
         </div>
 
         {/* 3 Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {cards.map((card) => {
             const Icon = card.icon;
 

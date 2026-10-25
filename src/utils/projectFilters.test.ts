@@ -12,7 +12,7 @@ const sampleProjects: ProjectItem[] = [
     status: 'In Progress',
     category: 'ai-agents',
     categoryLabel: 'AI & Agents',
-    summary: 'Leverages MCP and Claude 3.5 Sonnet & Gemini 1.5 Pro',
+    summary: 'Leverages MCP and Claude & Gemini',
     tags: ['Claude', 'Gemini', 'MCP', 'React'],
     githubUrl: '',
     hasLiveDemo: false,

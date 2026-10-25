@@ -283,24 +283,24 @@ export const PROFILE_DATA: ProfileData = {
       status: "In Progress",
       category: "ai-agents",
       categoryLabel: "AI & Agents",
-      summary: "Autonomous multi-model intelligence network leveraging Model Context Protocol (MCP) server tooling, dual-routing between Claude 3.5 Sonnet & Gemini 1.5 Pro, and automated execution loops via Google ADK.",
-      tags: ["Claude 3.5 Sonnet", "Gemini 1.5 Pro", "Google ADK", "MCP Server", "TypeScript", "React"],
+      summary: "Autonomous multi-model intelligence network leveraging Model Context Protocol (MCP) server tooling, dual-routing between Claude & Gemini, and automated execution loops via Google ADK.",
+      tags: ["Claude", "Gemini", "Google ADK", "MCP Server", "TypeScript", "React"],
       githubUrl: "https://github.com/kva-rules/multi-agent-orchestrator",
       hasLiveDemo: false,
       demoButtonText: "In Progress (Coming Soon)",
       runnerType: "ai-agent",
       architecture: {
-        overview: "Hierarchical agentic architecture coordinating model reasoning with specialized MCP server tools. Implements dynamic intent classification routing complex reasoning to Claude 3.5 Sonnet and high-context ingestion to Gemini 1.5 Pro.",
+        overview: "Hierarchical agentic architecture coordinating model reasoning with specialized MCP server tools. Implements dynamic intent classification routing complex reasoning to Claude and high-context ingestion to Gemini.",
         components: [
           "Agent Trace Dispatcher: Manages event streaming and live step inspection",
-          "Dual LLM Orchestrator: Dynamic router (Claude 3.5 Sonnet + Gemini 1.5 Pro)",
+          "Dual LLM Orchestrator: Dynamic router (Claude + Gemini)",
           "Model Context Protocol (MCP) Server: Secure tool registration & sandboxed execution",
           "Google ADK Execution Engine: Deterministic loops with state machine safety checks"
         ],
         dataFlow: [
           "User Request -> Agent Trace Dispatcher -> Evaluates token intent",
-          "High context payload -> Routed to Gemini 1.5 Pro (1M+ context window)",
-          "Deep reasoning / Tool logic -> Routed to Claude 3.5 Sonnet",
+          "High context payload -> Routed to Gemini (1M+ context window)",
+          "Deep reasoning / Tool logic -> Routed to Claude",
           "Tool calls validated via MCP schema -> Sandboxed execution -> Context merged"
         ],
         diagramLabel: "Multi-Agent MCP Tool Dispatch Pipeline"
@@ -404,9 +404,9 @@ export const PROFILE_DATA: ProfileData = {
       title: "AI & Autonomous Agents",
       subtitle: "Cognitive Workflows & LLM Orchestration",
       skills: [
-        "Claude 3.5 Sonnet",
+        "Claude",
         "Claude Code & Agent SDK",
-        "Gemini 1.5 Pro",
+        "Gemini",
         "Google ADK",
         "MCP Protocol",
         "Gemini Enterprise",

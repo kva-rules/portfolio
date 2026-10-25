@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Stats } from './components/Stats';
@@ -12,15 +12,13 @@ import { Education } from './components/Education';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { MobileBottomNav } from './components/MobileBottomNav';
-import { ArchitectureNodeScene } from './components/ThreeScene/ArchitectureNodeScene';
-import { VoiceAgentModal } from './components/VoiceAgent/VoiceAgentModal';
-import { MusicStudioModal } from './components/MusicStudio/MusicStudioModal';
+const ArchitectureNodeScene = lazy(() =>
+  import('./components/ThreeScene/ArchitectureNodeScene').then((m) => ({ default: m.ArchitectureNodeScene }))
+);
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('hero');
   const [is3DModalOpen, setIs3DModalOpen] = useState(false);
-  const [isVoiceOpen, setIsVoiceOpen] = useState(false);
-  const [isMusicOpen, setIsMusicOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,8 +67,6 @@ export default function App() {
         <ProjectsSection />
         <AiInnovationLab
           onOpen3D={() => setIs3DModalOpen(true)}
-          onOpenVoice={() => setIsVoiceOpen(true)}
-          onOpenMusic={() => setIsMusicOpen(true)}
         />
         <Skills />
         <Certifications />
@@ -92,24 +88,15 @@ export default function App() {
           aria-label="3D Architecture Visualizer"
           className="fixed inset-0 z-50 bg-[#040D26]/95 backdrop-blur-md flex flex-col"
         >
-          <ArchitectureNodeScene
-            isFullBleed={true}
-            onClose={() => setIs3DModalOpen(false)}
-          />
+          <Suspense fallback={<div className="m-auto text-cyan-400 font-mono text-sm">Loading 3D scene…</div>}>
+            <ArchitectureNodeScene
+              isFullBleed={true}
+              onClose={() => setIs3DModalOpen(false)}
+            />
+          </Suspense>
         </div>
       )}
 
-      {/* Live Audio Voice Agent Modal */}
-      <VoiceAgentModal
-        isOpen={isVoiceOpen}
-        onClose={() => setIsVoiceOpen(false)}
-      />
-
-      {/* AI Music Studio Modal */}
-      <MusicStudioModal
-        isOpen={isMusicOpen}
-        onClose={() => setIsMusicOpen(false)}
-      />
     </div>
   );
 }
