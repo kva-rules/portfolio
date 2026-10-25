@@ -1,0 +1,227 @@
+---
+name: Autonomous Vanguard
+colors:
+  surface: '#09122b'
+  surface-dim: '#09122b'
+  surface-bright: '#303853'
+  surface-container-lowest: '#040d26'
+  surface-container-low: '#111a33'
+  surface-container: '#161f38'
+  surface-container-high: '#202943'
+  surface-container-highest: '#2b344e'
+  on-surface: '#dbe1ff'
+  on-surface-variant: '#bbc9cd'
+  inverse-surface: '#dbe1ff'
+  inverse-on-surface: '#272f4a'
+  outline: '#859397'
+  outline-variant: '#3c494c'
+  surface-tint: '#2fd9f4'
+  primary: '#8aebff'
+  on-primary: '#00363e'
+  primary-container: '#22d3ee'
+  on-primary-container: '#005763'
+  inverse-primary: '#006877'
+  secondary: '#a8c8ff'
+  on-secondary: '#003062'
+  secondary-container: '#23497e'
+  on-secondary-container: '#97b9f6'
+  tertiary: '#ffd6a7'
+  on-tertiary: '#472a00'
+  tertiary-container: '#ffb147'
+  on-tertiary-container: '#704500'
+  error: '#ffb4ab'
+  on-error: '#690005'
+  error-container: '#93000a'
+  on-error-container: '#ffdad6'
+  primary-fixed: '#a2eeff'
+  primary-fixed-dim: '#2fd9f4'
+  on-primary-fixed: '#001f25'
+  on-primary-fixed-variant: '#004e5a'
+  secondary-fixed: '#d6e3ff'
+  secondary-fixed-dim: '#a8c8ff'
+  on-secondary-fixed: '#001b3d'
+  on-secondary-fixed-variant: '#20477c'
+  tertiary-fixed: '#ffddb8'
+  tertiary-fixed-dim: '#ffb95f'
+  on-tertiary-fixed: '#2a1700'
+  on-tertiary-fixed-variant: '#653e00'
+  background: '#09122b'
+  on-background: '#dbe1ff'
+  surface-variant: '#2b344e'
+typography:
+  display:
+    fontFamily: Inter
+    fontSize: 56px
+    fontWeight: '800'
+    lineHeight: 64px
+    letterSpacing: -0.03em
+  display-mobile:
+    fontFamily: Inter
+    fontSize: 36px
+    fontWeight: '800'
+    lineHeight: 44px
+    letterSpacing: -0.02em
+  headline-lg:
+    fontFamily: Inter
+    fontSize: 40px
+    fontWeight: '700'
+    lineHeight: 48px
+    letterSpacing: -0.025em
+  headline-lg-mobile:
+    fontFamily: Inter
+    fontSize: 28px
+    fontWeight: '700'
+    lineHeight: 36px
+    letterSpacing: -0.02em
+  headline-md:
+    fontFamily: Inter
+    fontSize: 28px
+    fontWeight: '600'
+    lineHeight: 36px
+    letterSpacing: -0.02em
+  headline-sm:
+    fontFamily: Inter
+    fontSize: 20px
+    fontWeight: '600'
+    lineHeight: 28px
+    letterSpacing: -0.01em
+  body-lg:
+    fontFamily: Inter
+    fontSize: 18px
+    fontWeight: '400'
+    lineHeight: 28px
+    letterSpacing: -0.005em
+  body-md:
+    fontFamily: Inter
+    fontSize: 15px
+    fontWeight: '400'
+    lineHeight: 24px
+    letterSpacing: 0em
+  body-sm:
+    fontFamily: Inter
+    fontSize: 13px
+    fontWeight: '400'
+    lineHeight: 20px
+    letterSpacing: 0.01em
+  label-code-lg:
+    fontFamily: JetBrains Mono
+    fontSize: 14px
+    fontWeight: '500'
+    lineHeight: 20px
+    letterSpacing: -0.01em
+  label-code-sm:
+    fontFamily: JetBrains Mono
+    fontSize: 12px
+    fontWeight: '500'
+    lineHeight: 16px
+    letterSpacing: 0.02em
+  label-code-xs:
+    fontFamily: JetBrains Mono
+    fontSize: 10px
+    fontWeight: '600'
+    lineHeight: 14px
+    letterSpacing: 0.05em
+rounded:
+  sm: 0.25rem
+  DEFAULT: 0.5rem
+  md: 0.75rem
+  lg: 1rem
+  xl: 1.5rem
+  full: 9999px
+spacing:
+  gutter: 1.5rem
+  gutter-sm: 1rem
+  margin: 3rem
+  margin-mobile: 1.25rem
+  space-xs: 0.25rem
+  space-sm: 0.5rem
+  space-md: 1rem
+  space-lg: 1.5rem
+  space-xl: 2.5rem
+---
+
+## Brand & Style
+
+This design system establishes an authoritative, high-caliber presence tailored for senior software engineering and autonomous AI agent architectures. It projects deep technical mastery, computational precision, and modern engineering maturity. 
+
+The aesthetic blends **Modern Tech Minimalism** with refined **Terminal Precision**:
+- Atmospheric depth through layered midnight-navy voids rather than flat blacks.
+- Laser-focused luminous accents signaling active system processes, machine logic, and algorithmic execution.
+- Deliberate dual-mode typographic cadence that marries structured corporate clarity with raw monospaced engineering syntax.
+- Visual weight balanced by restrained micro-borders, quiet luminescence, and soft geometric radii, avoiding ornamental excess in favor of functional density.
+
+## Colors
+
+The palette is engineered around dark-spectrum immersion, minimizing eye strain while emphasizing interactive signal paths and data density.
+
+### Palette Hierarchy & Intent
+- **Canvas Base (`#0B1020` to `#111A33`):** Directional radial and linear canvas gradients simulate infinite compilation space and execution depth.
+- **Surface Tiers (`#131C38`, `#1A2447`, `#1E2B54`):** Slate-navy containers provide distinct ground layers without relying on harsh high-contrast dividers.
+- **Primary Accent (`#22D3EE` - Electric Cyan):** Active states, critical interaction triggers, active pipeline nodes, and real-time status pulses.
+- **Secondary Accent (`#9FC2FF` - Periwinkle Steel):** Structural interfaces, supporting visual graphs, secondary interactions, and structural framing.
+- **Tertiary Accent (`#F59E0B` - Warm Amber):** Execution warnings, model evaluation tokens, state machines, and runtime highlight markers.
+- **Text & Foreground:** Pure high-emission whites (`#F8FAFC`) for titles, desaturated slate (`#94A3B8`) for body metrics, and low-priority muted steel (`#64748B`) for tertiary syntax.
+
+## Typography
+
+The typographic hierarchy enforces immediate cognitive sorting between architecture overview copy and structural machine code:
+- **Inter** handles narrative structure, project retrospectives, system descriptions, and primary navigation. Tight tracking at large scales delivers architectural authority, while standard spacing in body copy guarantees legibility across dense project deep-dives.
+- **JetBrains Mono** governs all technical metadata: git commit references, architecture telemetry, tech stack pills, agent step traces, and inline code blocks.
+- Mathematical operators, status labels, and schema parameters must strictly inherit monospaced styles with tabular numbers (`tnum`) enabled to preserve visual alignment across dynamic telemetry readouts.
+
+## Layout & Spacing
+
+The layout is built upon a **12-column fluid grid system** anchored by a max-width container of `1320px` to optimize code scanability and interface readability on high-resolution displays.
+
+### Form Factor Behavior
+- **Desktop (1024px+):** 12 columns, `1.5rem` (24px) gutters, and `3rem` (48px) margin edges. Asymmetrical layouts are favored (e.g., 7-column architectural breakdowns paired with 5-column live agent trace sandboxes).
+- **Tablet (768px – 1023px):** 8 columns, `1.5rem` gutters, and `2rem` margins. Complex side-by-side terminal panes collapse into tabbed interfaces.
+- **Mobile (&lt;768px):** 4 columns, `1rem` gutters, and `1.25rem` margins. All structural grids collapse into vertical stacks with edge-snapping horizontal carousels for tech stack chips and quick metrics.
+
+Component internals adhere strictly to an 8px base rhythm (`0.5rem`, `1rem`, `1.5rem`, `2.5rem`), maintaining disciplined alignment across complex multi-column dashboards.
+
+## Elevation & Depth
+
+Visual hierarchy uses a calibrated synthesis of **tonal surface stacking**, **subtle micro-borders**, and **luminous ambient glows**:
+
+### Surface Hierarchy
+1. **Canvas (Lowest):** Background linear gradient spanning `#0B1020` at the apex to `#111A33` at the base.
+2. **Resting Layer (`#131C38`):** Baseline container level for inactive cards, project panels, and terminal backgrounds. Bordered with a 1px stroke of `rgba(159, 194, 255, 0.08)`.
+3. **Elevated Layer (`#1A2447`):** Interactive cards, code execution boxes, and flyouts. Features a dual-ring border: an inner 1px border of `rgba(34, 211, 238, 0.15)` and an ambient shadow of `0 12px 32px -8px rgba(11, 16, 32, 0.8)`.
+4. **Focused / Hovered Tier (`#1E2B54`):** Activated elements shift up tonal level accompanied by a directed cyan edge diffusion: `0 0 20px -2px rgba(34, 211, 238, 0.25)`.
+
+Modal sheets and sticky navigation overlays apply a backdrop blur of `16px` combined with a `80%` opacity fill of `#0B1020` to reveal context without losing legibility.
+
+## Shapes
+
+The interface embraces a unified structural roundedness profile with an emphasis on modern structural softness:
+- **Base Cards, Terminals & Panels:** Standardized on `rounded-2xl` (16px / `1rem`), generating a balanced frame for code blocks and visual diagrams.
+- **Interactive Elements (Buttons, Inputs, Selectors):** Utilize `rounded-xl` (12px / `0.75rem`) to maintain proportional ergonomics against larger bounding boxes.
+- **Badges, Status Indicators & Tags:** Implement pill geometry (`rounded-full`) or tightened structural radii (`rounded-md` / 6px) when housing high-density monospaced telemetry tokens.
+
+## Components
+
+### Buttons & Interactive Triggers
+- **Primary Action:** Solid `#22D3EE` background with deep slate `#0B1020` semibold typography. Features a soft outer cyan halo (`0 0 16px rgba(34, 211, 238, 0.35)`). On hover, brightness scales to 1.08 with an elevated ambient spread.
+- **Secondary / Ghost Action:** Translucent surface (`#131C38`) with a 1px border of `rgba(159, 194, 255, 0.2)`. Text is `#9FC2FF`. On hover, the border transitions to `#22D3EE` with an inner background glow.
+- **Icon / Terminal Triggers:** Compact square or circular surfaces (`#1A2447`) with inset monospaced icons, reacting with rapid cyan color transitions.
+
+### Cards & Project Showcases
+- Engineered using `rounded-2xl` containers filled with `#131C38`.
+- Wrapped in a crisp 1px stroke (`rgba(159, 194, 255, 0.1)`). On hover, cards subtly elevate using a transform of `translateY(-2px)`, the border transitions to `rgba(34, 211, 238, 0.4)`, and the ambient glow blooms outward.
+- Header bars mimic stylized developer console title bars with integrated branch labels or agent heartbeat indicators.
+
+### Tech Badges & Status Chips
+- Composed strictly in **JetBrains Mono** (`label-code-sm` or `label-code-xs`).
+- Background: `rgba(26, 36, 71, 0.8)` with a 1px border colored according to state:
+  - *Active / Deployed:* Border in `rgba(34, 211, 238, 0.4)`, text in `#22D3EE`.
+  - *Pipeline / In-Flight:* Border in `rgba(245, 158, 11, 0.4)`, text in `#F59E0B`.
+  - *Static Utility:* Border in `rgba(159, 194, 255, 0.15)`, text in `#94A3B8`.
+
+### Input Fields & Terminal Consoles
+- **Inputs:** Dark slate base (`#0B1020`) with 1px border in `#1A2447`. Typography is Inter for prompts, falling back to JetBrains Mono for system inputs. Focus transitions the border to `#22D3EE` with a `0 0 0 1px #22D3EE` keyline ring.
+- **Agent Output Terminals:** Inset surfaces (`#0B1020`) sporting a persistent left-aligned status bar indicator (Cyan for operational, Amber for evaluation/agent decision divergence).
+
+### Checkboxes, Radios & Switches
+- Built with sharp contrast: inactive state is a muted box (`#1A2447`) with a 1px border (`#1E2B54`).
+- Active state fills with `#22D3EE`, displaying an ink-black tick icon (`#0B1020`) to preserve immediate visibility against deep backgrounds.
