@@ -314,6 +314,49 @@ export const PROFILE_DATA: ProfileData = {
       }
     },
     {
+      id: "proj-4",
+      title: "AI Job Hunter – n8n Automation",
+      subtitle: "Personal automation (Oct 2026) · Finds, scores and tracks jobs twice a day",
+      badge: "AI Workflow Automation",
+      status: "Active",
+      category: "ai-agents",
+      categoryLabel: "AI & Agents",
+      summary: "Self-hosted n8n workflows that collect jobs from alert emails (Gmail API), 4 remote job boards and 28 company careers APIs, filter them with a JavaScript rule engine, score each against my resume with Google Gemini, log them to Google Sheets and send the best 5 to Telegram with Apply/Skip links. First run: 565 jobs → 32 shortlisted → 5 sent.",
+      tags: ["n8n", "Google Gemini", "Gmail API", "Google Sheets API", "Telegram Bot API", "OAuth 2.0", "JavaScript", "Node.js", "pm2"],
+      githubUrl: "https://github.com/kva-rules/automation-n8n-ai-job-hunter",
+      hasLiveDemo: false,
+      demoButtonText: "View Architecture Spec",
+      runnerType: "ai-agent",
+      architecture: {
+        overview: "Three n8n workflows. A scheduled pipeline (10 AM / 8 PM) gathers jobs from allowed sources only, de-duplicates them across runs, applies role, salary, location and visa rules, then sends up to 40 jobs to Gemini in a single prompt for 0–100 scoring with a fallback model. A webhook workflow records Apply/Skip decisions, and a 9 PM workflow sends a digest. Nothing is applied automatically.",
+        components: [
+          "Collector: Gmail alert parser + Remotive, RemoteOK, Himalayas, WeWorkRemotely + Greenhouse/Lever/Ashby job APIs",
+          "Remove Duplicates: each job scored only once across executions",
+          "Rule engine (JavaScript): roles, excluded titles, experience, salary floors, visa sponsorship, target-company ranking",
+          "Gemini scorer: Basic LLM Chain with Gemini 3.5 Flash and automatic Flash Lite fallback, strict JSON output",
+          "Google Sheets tracker: upsert by Job ID with status, follow-up dates and notes",
+          "Telegram bot: job cards with Apply/Skip links and a daily digest",
+          "Webhook handler: marks Applied/Skipped, sets a 7-day follow-up, opens the posting"
+        ],
+        dataFlow: [
+          "Schedule -> Gmail alerts + public job APIs -> ~550 jobs",
+          "Skip seen -> rule filter -> top 40 candidates",
+          "One Gemini prompt -> scores, reasons and gaps as JSON",
+          "Score >= 70 -> best 5 -> Google Sheet (Pending) -> Telegram",
+          "Apply/Skip click -> webhook -> Sheet updated -> 9 PM digest"
+        ],
+        diagramLabel: "n8n Job Pipeline: Collect → Filter → Gemini → Sheets → Telegram"
+      },
+      techSpecs: {
+        runtime: "n8n 2.x self-hosted on Node.js 22 (pm2)",
+        frameworks: ["n8n Code nodes (JavaScript)", "n8n LangChain Basic LLM Chain", "Google Gemini API"],
+        databases: ["Google Sheets (job tracker)", "n8n SQLite (execution history, de-duplication)"],
+        messaging: ["Telegram Bot API", "n8n Webhook"],
+        testing: ["Manual test executions per node", "Live run validation"],
+        deployment: ["pm2 on macOS", "Google Cloud OAuth 2.0 client"]
+      }
+    },
+    {
       id: "proj-2",
       title: "Ticketing System – Event-Driven Microservices",
       subtitle: "M.Tech final project (Jan–Jun 2026) · Support ticketing with solutions, knowledge base and rewards",
@@ -412,6 +455,7 @@ export const PROFILE_DATA: ProfileData = {
         "Gemini",
         "Google ADK",
         "MCP Protocol",
+        "n8n Workflow Automation",
         "Gemini Enterprise",
         "Model Armor",
         "Context Engineering",
